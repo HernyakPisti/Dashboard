@@ -6,7 +6,6 @@ import { useMemo } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Dashboard from "scenes/dashboard";
 import Layout from "scenes/layout";
-import Products from "scenes/products";
 import Computers from "scenes/computers";
 function App() {
   const mode = useSelector((state) => state.global.mode);

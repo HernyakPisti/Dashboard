@@ -10,13 +10,86 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import { useGetComputersQuery } from "state/api";
 import Header from "components/Header";
-console.log("Itt");
 const Computer = ({ _id, name, user, anydesk, location, drivers }) => {
   const theme = useTheme();
   const [isEditing, setIsEditing] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  if (!isEditing) {
+    return (
+      <Card
+        sx={{
+          backgroundImage: "none",
+          backgroundColor: theme.palette.background.alt,
+          borderRadius: "0.55rem",
+        }}
+      >
+        <CardContent>
+          <Typography
+            sx={{ fontSize: 14 }}
+            color={theme.palette.secondary[700]}
+            gutterBottom
+          >
+            {location}
+          </Typography>
+          <Typography variant="h5" component={"div"}>
+            {name}
+          </Typography>
+          <Typography
+            sx={{ mb: "1.5rem" }}
+            color={theme.palette.secondary[400]}
+          >
+            {user}
+          </Typography>
+          <Button
+            variant="primary"
+            size="small"
+            onClick={() => {
+              navigator.clipboard.writeText(
+                "C:\\Program Files (x86)\\AnyDesk\\AnyDesk.exe " + anydesk
+              );
+            }}
+            sx={{
+              border: "1px solid",
+              borderColor: theme.palette.secondary[700],
+            }}
+          >
+            <Typography>Anydesk</Typography>
+          </Button>
+        </CardContent>
+        <CardActions sx={{ justifyContent: "space-between" }}>
+          <Button
+            variant="primary"
+            size="small"
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            See More
+          </Button>
+          <Button
+            sx={{ align: "right" }}
+            onClick={() => {
+              setIsEditing(!isEditing);
+            }}
+          >
+            <EditIcon />
+          </Button>
+        </CardActions>
+        <Collapse
+          in={isExpanded}
+          timeout={"auto"}
+          unmountOnExit
+          sx={{ color: theme.palette.neutral[300] }}
+        >
+          <CardContent>
+            {/* <Typography>id: {_id}</Typography> */}
+            <Typography>Drivers: {drivers}</Typography>
+          </CardContent>
+        </Collapse>
+      </Card>
+    );
+  }
   return (
     <Card
       sx={{
@@ -26,55 +99,44 @@ const Computer = ({ _id, name, user, anydesk, location, drivers }) => {
       }}
     >
       <CardContent>
-        <Typography
-          sx={{ fontSize: 14 }}
-          color={theme.palette.secondary[700]}
-          gutterBottom
-        >
-          {location}
-        </Typography>
-        <Typography variant="h5" component={"div"}>
-          {name}
-        </Typography>
-        <Typography sx={{ mb: "1.5rem" }} color={theme.palette.secondary[400]}>
-          {user}
-        </Typography>
-        <Button
-          variant="primary"
-          size="small"
-          onClick={() => {
-            navigator.clipboard.writeText(
-              "C:\\Program Files (x86)\\AnyDesk\\AnyDesk.exe " + anydesk
-            );
-          }}
-          sx={{
-            border: "1px solid",
-            borderColor: theme.palette.secondary[700],
-          }}
-        >
-          <Typography>Anydesk</Typography>
-        </Button>
+        <form>
+          <Typography
+            sx={{ fontSize: 14 }}
+            color={theme.palette.secondary[700]}
+            gutterBottom
+          >
+            {location}
+          </Typography>
+          <Typography variant="h5" component={"div"}>
+            {name}
+          </Typography>
+          <Typography
+            sx={{ mb: "1.5rem" }}
+            color={theme.palette.secondary[400]}
+          >
+            {user}
+          </Typography>
+          <input
+            type="text"
+            value={anydesk}
+            background-color={theme.palette.background.alt}
+          />
+        </form>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ justifyContent: "space-between" }}>
         <Button
-          variant="primary"
-          size="small"
-          onClick={() => setIsExpanded(!isExpanded)}
+          variant="outlined"
+          color="error"
+          onClick={() => {
+            setIsEditing(!isEditing);
+          }}
         >
-          See More
+          Cancel
+        </Button>
+        <Button variant="outlined" color="success">
+          Save
         </Button>
       </CardActions>
-      <Collapse
-        in={isExpanded}
-        timeout={"auto"}
-        unmountOnExit
-        sx={{ color: theme.palette.neutral[300] }}
-      >
-        <CardContent>
-          {/* <Typography>id: {_id}</Typography> */}
-          <Typography>Drivers: {drivers}</Typography>
-        </CardContent>
-      </Collapse>
     </Card>
   );
 };
