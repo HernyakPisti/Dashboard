@@ -1,6 +1,6 @@
 import Product from "../models/Product.js";
 import ProductStat from "../models/ProductStat.js";
-
+import Computer from "../models/Computer.js";
 
 export const getProducts = async(req,res) =>{
     try{
@@ -18,6 +18,15 @@ export const getProducts = async(req,res) =>{
         );
         res.status(200).json(productsWithStats);
     } catch(error){
+        res.status(404).json({message: error.message})
+    }
+}
+
+export const getComputers = async(req, res) =>{
+    try{
+        const computers =await Computer.find();
+        res.status(200).json(computers);
+    }catch(error){
         res.status(404).json({message: error.message})
     }
 }

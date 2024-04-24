@@ -28,6 +28,7 @@ import {
   PublicOutlined,
   PointOfSaleOutlined,
   ChevronRightOutlined,
+  ComputerOutlined,
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -48,6 +49,10 @@ const navItems = [
     icon: <ShoppingCartOutlined />,
   },
   {
+    text: "Computers",
+    icon: <ComputerOutlined />,
+  },
+  {
     text: "Customers",
     icon: <Groups2Outlined />,
   },
@@ -56,7 +61,7 @@ const navItems = [
     icon: <ReceiptLongOutlined />,
   },
   {
-    text: "Geopraphy",
+    text: "Geography",
     icon: <PublicOutlined />,
   },
   {
