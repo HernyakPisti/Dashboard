@@ -44,10 +44,10 @@ const navItems = [
     text: "Client Facing",
     icon: null,
   },
-  {
-    text: "Products",
-    icon: <ShoppingCartOutlined />,
-  },
+  // {
+  //   text: "Products",
+  //   icon: <ShoppingCartOutlined />,
+  // },
   {
     text: "Computers",
     icon: <ComputerOutlined />,

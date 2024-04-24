@@ -7,7 +7,6 @@ import {
   Collapse,
   Button,
   Typography,
-  Rating,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
@@ -16,6 +15,7 @@ import Header from "components/Header";
 console.log("Itt");
 const Computer = ({ _id, name, user, anydesk, location, drivers }) => {
   const theme = useTheme();
+  const [isEditing, setIsEditing] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <Card
@@ -39,7 +39,21 @@ const Computer = ({ _id, name, user, anydesk, location, drivers }) => {
         <Typography sx={{ mb: "1.5rem" }} color={theme.palette.secondary[400]}>
           {user}
         </Typography>
-        <Typography variant="body2">{anydesk}</Typography>
+        <Button
+          variant="primary"
+          size="small"
+          onClick={() => {
+            navigator.clipboard.writeText(
+              "C:\\Program Files (x86)\\AnyDesk\\AnyDesk.exe " + anydesk
+            );
+          }}
+          sx={{
+            border: "1px solid",
+            borderColor: theme.palette.secondary[700],
+          }}
+        >
+          <Typography>Anydesk</Typography>
+        </Button>
       </CardContent>
       <CardActions>
         <Button
@@ -57,7 +71,7 @@ const Computer = ({ _id, name, user, anydesk, location, drivers }) => {
         sx={{ color: theme.palette.neutral[300] }}
       >
         <CardContent>
-          <Typography>id: {_id}</Typography>
+          {/* <Typography>id: {_id}</Typography> */}
           <Typography>Drivers: {drivers}</Typography>
         </CardContent>
       </Collapse>
@@ -67,7 +81,6 @@ const Computer = ({ _id, name, user, anydesk, location, drivers }) => {
 
 const Computers = () => {
   const { data, isLoading } = useGetComputersQuery();
-  console.log("🚀 ~ Computers ~ data:", data);
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
   return (
     <Box m="1.5rem 2.5rem">

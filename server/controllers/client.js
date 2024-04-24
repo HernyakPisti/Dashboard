@@ -24,7 +24,7 @@ export const getProducts = async(req,res) =>{
 
 export const getComputers = async(req, res) =>{
     try{
-        const computers =await Computer.find();
+        const computers =await Computer.find().sort('field').sort('location');
         res.status(200).json(computers);
     }catch(error){
         res.status(404).json({message: error.message})
