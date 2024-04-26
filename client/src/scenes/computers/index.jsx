@@ -13,7 +13,9 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import { useGetComputersQuery } from "state/api";
 import Header from "components/Header";
-const Computer = ({ _id, name, user, anydesk, location, drivers }) => {
+import "C:\\Users\\HernyákIstván\\Desktop\\Dashboard\\Dashboard\\client\\src\\index.css"
+import InputBase from '@mui/material/InputBase'
+const Computer = ({ _id, name, user, anydesk, location,field, drivers }) => {
   const theme = useTheme();
   const [isEditing, setIsEditing] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -98,30 +100,38 @@ const Computer = ({ _id, name, user, anydesk, location, drivers }) => {
         borderRadius: "0.55rem",
       }}
     >
+      <form>
       <CardContent>
-        <form>
-          <Typography
-            sx={{ fontSize: 14 }}
-            color={theme.palette.secondary[700]}
-            gutterBottom
-          >
-            {location}
-          </Typography>
-          <Typography variant="h5" component={"div"}>
-            {name}
-          </Typography>
-          <Typography
-            sx={{ mb: "1.5rem" }}
-            color={theme.palette.secondary[400]}
-          >
-            {user}
-          </Typography>
-          <input
-            type="text"
-            value={anydesk}
-            background-color={theme.palette.background.alt}
+        
+          <label>
+            Location:
+          <InputBase 
+          name="location"
+          defaultValue={location}
           />
-        </form>
+          </label>
+        
+          <InputBase 
+          defaultValue={name}
+          />
+
+          <InputBase 
+          defaultValue={user}
+          />
+          <InputBase 
+          defaultValue={anydesk}
+          />
+          <label>
+          <InputBase 
+          defaultValue={field}
+          />
+          </label>
+          <label>
+          <InputBase 
+          defaultValue={drivers}
+          />
+          </label>          
+        
       </CardContent>
       <CardActions sx={{ justifyContent: "space-between" }}>
         <Button
@@ -133,10 +143,11 @@ const Computer = ({ _id, name, user, anydesk, location, drivers }) => {
         >
           Cancel
         </Button>
-        <Button variant="outlined" color="success">
+        <Button variant="outlined" color="success" type="submit">
           Save
         </Button>
-      </CardActions>
+      </CardActions>         
+      </form>
     </Card>
   );
 };
@@ -157,7 +168,7 @@ const Computers = () => {
           columnGap={"1.33%"}
           sx={{ "& > div": { gridColumn: isNonMobile ? undefined : "span 4" } }}
         >
-          {data.map(({ _id, name, user, anydesk, location, drivers }) => (
+          {data.map(({ _id, name, user, anydesk, location,field, drivers }) => (
             <Computer
               key={_id}
               _id={_id}
@@ -166,6 +177,7 @@ const Computers = () => {
               anydesk={anydesk}
               location={location}
               drivers={drivers}
+              field={field}
             />
           ))}
         </Box>
