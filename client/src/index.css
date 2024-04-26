@@ -8,11 +8,3 @@ body,
     width: 100%;
     font-family: "Inter", sans-serif;
 }
-.MuiInputBase-root{
-    border: 1px solid;
-    border-radius: 10px;
-    padding: 0.2rem;
-    border-color : #cca752;
-    background-color :#191f45;
-    margin-bottom: 0.2rem;
-}

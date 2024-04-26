@@ -9,12 +9,14 @@ import {
   Typography,
   useTheme,
   useMediaQuery,
+  TextField, 
+  FormControl
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useGetComputersQuery } from "state/api";
 import Header from "components/Header";
-import "C:\\Users\\HernyákIstván\\Desktop\\Dashboard\\Dashboard\\client\\src\\index.css"
-import InputBase from '@mui/material/InputBase'
+import { useFormControl } from '@mui/material/FormControl';
+import { Form } from "react-router-dom";
 const Computer = ({ _id, name, user, anydesk, location,field, drivers }) => {
   const theme = useTheme();
   const [isEditing, setIsEditing] = useState(false);
@@ -101,37 +103,50 @@ const Computer = ({ _id, name, user, anydesk, location,field, drivers }) => {
       }}
     >
       <form>
-      <CardContent>
+      <CardContent> 
+        <TextField 
+        label="Location:"  
+        defaultValue={location}
+        required
+        variant="outlined"
+        sx={{mb:"0.75rem"}}
+        />         
         
-          <label>
-            Location:
-          <InputBase 
-          name="location"
-          defaultValue={location}
-          />
-          </label>
-        
-          <InputBase 
-          defaultValue={name}
-          />
-
-          <InputBase 
-          defaultValue={user}
-          />
-          <InputBase 
-          defaultValue={anydesk}
-          />
-          <label>
-          <InputBase 
-          defaultValue={field}
-          />
-          </label>
-          <label>
-          <InputBase 
-          defaultValue={drivers}
-          />
-          </label>          
-        
+        <TextField 
+        label="Name:"  
+        defaultValue={name}
+        required
+        variant="outlined"
+        sx={{mb:"0.75rem"}}
+        />         
+        <TextField 
+        label="User:"  
+        defaultValue={user}
+        required
+        variant="outlined"
+        sx={{mb:"0.75rem"}}
+        />      
+        <TextField 
+        label="Anydesk:"  
+        defaultValue={anydesk}
+        required
+        variant="outlined"
+        sx={{mb:"0.75rem"}}
+        />      
+        <TextField 
+        label="Field:"  
+        defaultValue={field}
+        required
+        variant="outlined"
+        sx={{mb:"0.75rem"}}
+        />      
+        <TextField 
+        label="Drivers:"  
+        defaultValue={drivers}
+        variant="outlined"
+        sx={{mb:"0.75rem"}}
+        focused
+        />            
       </CardContent>
       <CardActions sx={{ justifyContent: "space-between" }}>
         <Button
@@ -143,7 +158,7 @@ const Computer = ({ _id, name, user, anydesk, location,field, drivers }) => {
         >
           Cancel
         </Button>
-        <Button variant="outlined" color="success" type="submit">
+        <Button variant="outlined" color="success" type="submit" >
           Save
         </Button>
       </CardActions>         
